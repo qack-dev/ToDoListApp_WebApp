@@ -24,7 +24,7 @@ app = FastAPI()
 
 # 静的ファイルの配信設定
 app.mount('/static', StaticFiles(directory='../frontend/static'), name='static')
-# CORSの設定
+# CORS（Cross-Origin Resource Sharing（クロスオリジンリソース共有））の設定
 # ブラウザのJavaScriptから、FastAPIのAPIへのアクセスを許可
 origins = [
     "http://localhost",
@@ -35,7 +35,7 @@ app.add_middleware(
     allow_origins=origins, # オリジン(URL)からのアクセスを許可
     allow_credentials=True, # Cookieを許可
     allow_methods=["*"], #全てのHTTPメソッド（GET, POST, DELETEなど）を許可
-    allow_headers=["*"] # 全てのHTTPヘッダーを許可
+    allow_headers=["*"] # 全てのHTTPリクエストヘッダーを許可
 )
 
 # Jsonファイルを読み込む
