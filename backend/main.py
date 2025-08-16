@@ -5,6 +5,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Literal
 import json
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 # バックグラウンド処理実行コマンド
 # >uvicorn main:app --reload
@@ -19,6 +21,22 @@ tasks = {}
 tasks_file = 'tasks.json'
 
 app = FastAPI()
+
+# 静的ファイルの配信設定
+app.mount('/static', StaticFiles(directory='../frontend/static'), name='static')
+# CORSの設定
+# ブラウザのJavaScriptから、FastAPIのAPIへのアクセスを許可
+origins = [
+    "http://localhost",
+    "http://localhost:8000"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins, # オリジン(URL)からのアクセスを許可
+    allow_credentials=True, # Cookieを許可
+    allow_methods=["*"], #全てのHTTPメソッド（GET, POST, DELETEなど）を許可
+    allow_headers=["*"] # 全てのHTTPヘッダーを許可
+)
 
 # Jsonファイルを読み込む
 def load_tasks_from_file():
