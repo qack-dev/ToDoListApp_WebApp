@@ -15,3 +15,24 @@ window.onload = async () => {
         taskListElement.appendChild(li);
     }
 };
+
+// 追加ボタンが押下されたときの処理
+const addButton = document.getElementById("add-button");
+addButton.onclick = async () => {
+    const taskNameInput = document.getElementById("task-name-input");
+    const taskPriorityInput = document.getElementById("task-priority-input");
+    const newTask = {
+        name: taskNameInput.value,
+        priority: taskPriorityInput.value
+    }
+    // backendの`POST /tasks`を呼び出す
+    await fetch('/tasks', {
+        method: 'POST', // POSTメソッドを使用
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newTask) // リクエストボディに新しいタスクを送信
+    });
+    // タスク追加後、「■現在のタスク一覧」を再読み込み
+    window.onload();
+}
