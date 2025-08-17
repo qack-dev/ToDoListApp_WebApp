@@ -16,19 +16,19 @@ graph TD
     subgraph "ユーザーのPC (ブラウザ)"
         direction LR
         A[HTML/CSS] --> B(JavaScript);
-        B -- 1. APIリクエスト (例: GET /tasks) --> C;
-        C -- 4. JSONデータで応答 --> B;
-        B -- 5. DOM操作 --> D[画面の表示を更新];
+        B -- 1.APIリクエスト (例: GET /tasks) --> C;
+        C -- 4.JSONデータで応答 --> B;
+        B -- 5.DOM操作 --> D[画面の表示を更新];
     end
 
     subgraph "Webサーバー"
         direction LR
-        C(FastAPIバックエンド) -- 2. 読み書き --> E(tasks.json);
-        E -- 3. データ --> C;
+        C(FastAPIバックエンド) -- 2.読み書き --> E(tasks.json);
+        E -- 3.データ --> C;
     end
 
-    style B fill:#F9F,stroke:#333,stroke-width:2px
-    style C fill:#CCF,stroke:#333,stroke-width:2px
+    style B fill:#C71585,stroke:#333,stroke-width:2px
+    style C fill:#00008B,stroke:#333,stroke-width:2px
 ```
 
 ## 主な機能
