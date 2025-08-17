@@ -38,3 +38,19 @@ addButton.onclick = async () => {
     // タスク追加後、「■現在のタスク一覧」を再読み込み
     window.onload();
 }
+
+// 削除ボタンが押下された時の処理
+const deleteButton = document.getElementById("delete-button");
+deleteButton.onclick = async () => {
+    const taskIdInput = Number(document.getElementById("task-id-input").value) - 1; // idは0から始まり、olタグは1から始まるため
+    // backendの`DELETE /tasks/{task_id}`を呼び出す
+    await fetch('/tasks/' + taskIdInput, {
+        method: 'DELETE', // DELETEメソッドを使用
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id: taskIdInput}) // リクエストボディに削除するタスクのidを送信
+    });
+    // タスク追加後、「■現在のタスク一覧」を再読み込み
+    window.onload();
+}
