@@ -4,6 +4,8 @@ window.onload = async () => {
     const tasks = await response.json(); // JSONで取得
     const taskListElement = document.getElementById("task-list");
 
+    // リストを空へ
+    taskListElement.innerHTML = '';
     // 取得したタスクをリストに追加
     for (const id in tasks) {
         const task = tasks[id];
